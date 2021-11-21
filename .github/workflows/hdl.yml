@@ -1,0 +1,17 @@
+name: 'hdl'
+
+on:
+  push:
+
+jobs:
+  examples:
+    name: 'Running examples'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pulling a container image with FLOSS synthesizers
+      run: docker pull hdlc/ghdl:yosys
+    - name: Running synthesis for VHDL files
+      run: make -C hdl vhdl
+    - name: Running synthesis for Verilog files
+      run: make -C hdl vlog
