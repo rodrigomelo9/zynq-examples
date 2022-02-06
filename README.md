@@ -7,9 +7,9 @@ Here you will find general-purpose examples about Zynq 7000 and Zynq UltraScale+
 These examples will be related to features of the devices or how to perform certain tasks with Vivado/Vitis (not the old SDK).
 The examples are based on ZYBO (not the newest Zybo Z7, see [here](https://digilent.com/reference/programmable-logic/zybo-z7/migration-guide) for more details) and the ZCU102 board, basically because these are the boards that I have (however, most of them should be easily adaptable).
 
-Under the [howto](howto) directory you will find some very simple, step-by-step guides (practical recipes, without much theory).
-Then, you will find directories related to a particular topic (I can imagine *UART*, *I2C*, *SPI*, *AXIDMA*, *psdma*, *transceivers*, among others), and one or more examples inside, with instructions to easily reproduce them.
-The idea is to provide a simple starting point, that you can see in action and to start playing with.
+Under the [doc](doc) directory you will find some very simple, step-by-step guides (practical recipes, without much theory).
+Then, you will find directories related to a particular topic (I can imagine *axidma*, *ps*, *pl*, *emio*, *transceivers*, among others), and one or more examples inside, with instructions to easily reproduce them.
+The idea is to provide a simple starting point, that you can see in action, to quickly start playing with.
 
 ## Reasons for this repository?
 
