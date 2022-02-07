@@ -5,11 +5,15 @@
 
 Here you will find general-purpose examples about Zynq 7000 and Zynq UltraScale+ devices from Xilinx.
 These examples will be related to features of the devices or how to perform certain tasks with Vivado/Vitis (not the old SDK).
-The examples are based on ZYBO (not the newest Zybo Z7, see [here](https://digilent.com/reference/programmable-logic/zybo-z7/migration-guide) for more details) and the ZCU102 board, basically because these are the boards that I have (however, most of them should be easily adaptable).
+The examples are based on ZYBO (not the newest Zybo Z7, see [here](https://digilent.com/reference/programmable-logic/zybo-z7/migration-guide) for more details) and the ZCU102 board, basically because these are the boards that I have, but most of them should be easily adaptable.
 
 Under the [doc](doc) directory you will find some very simple, step-by-step guides (practical recipes, without much theory).
 Then, you will find directories related to a particular topic (I can imagine *axidma*, *ps*, *pl*, *emio*, *transceivers*, among others), and one or more examples inside, with instructions to easily reproduce them.
 The idea is to provide a simple starting point, that you can see in action, to quickly start playing with.
+
+Take into account that I try to maintain each example/guide as simple as possible, with a few or no at all images, and minimal instructions.
+It is because time-to-time, there is a *refresh* of the graphical interface, so images (and sometimes text) are automatically outdated.
+It is the reason why I include a **note** at the beginning, informing the last version where tested.
 
 ## Reasons for this repository?
 
@@ -21,7 +25,7 @@ So I already have or create new examples time-to-time (see [here](https://github
 Finally, I am sometimes asked for help/examples.
 These reasons made me think that is a good idea to have this space.
 
-Please, take into account that I do not have a roadmap and could happen months between updates.
+Please, take into account that I do not have a clear [roadmap](https://github.com/rodrigomelo9/zynq-examples/issues/5) and could happen months between updates.
 
 ## What am I doing in Continuous Integration?
 
