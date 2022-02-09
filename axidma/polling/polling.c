@@ -1,5 +1,5 @@
 /*
-* AXI DMA in Simple Polling Mode
+* AXI DMA in Simple Mode by Polling
 *
 * Copyright (c) 2018-2022, Rodrigo A. Melo
 * Licensed under ISC License
@@ -51,6 +51,8 @@ int dma_init(int device_id) {
   return XST_SUCCESS;
 }
 
+/***************************************************************************/
+
 int dma_example() {
   int i, status, try;
   data_t *tx_buf, *rx_buf;
@@ -97,7 +99,7 @@ int main() {
   if (status != XST_SUCCESS) {
     xil_printf("DMA initialization failed\r\n");
     return XST_FAILURE;
-   }
+  }
   xil_printf("* Playing with DMA\r\n");
   status = dma_example();
   if (status != XST_SUCCESS) {
