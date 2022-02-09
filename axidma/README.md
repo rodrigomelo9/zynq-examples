@@ -5,4 +5,5 @@ It can be used in Direct Register (Simple) or Scatter-Gather mode.
 The second one provides higher performance, at expense of more resources and more complex functionality, based on descriptors.
 
 Examples:
-* [polling](polling): AXI DMA in simple mode, by polling
+* [polling](polling): AXI DMA in simple mode, by polling.
+* [interrupts](interrupts): AXI DMA in simple mode, by interrupts.

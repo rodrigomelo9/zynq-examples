@@ -17,11 +17,11 @@
 
 ## Block design creation
 
-* *Create Block Design*, *OK* (default values).
 * For a supported board, go to the *Tcl Console* and run `source <REPO_ROOT>/axidma/polling/polling_<BOARD>.tcl`.
 * If your board is not supported, or if you want to create it from scratch, proceed with the instructions for the desired device family.
 
 Instructions for `Zynq-7000` devices:
+* *Create Block Design*, *OK* (default values).
 * Click `+` (*Add IP*), search `zynq` and select `ZYNQ7 Processing System`.
 * Click *Run Block Automation*, check *Apply Board Preset*, *OK*.
 * Double click on *processing_system7_0*.
