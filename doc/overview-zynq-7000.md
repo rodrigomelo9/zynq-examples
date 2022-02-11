@@ -63,13 +63,20 @@ The PL is derived from Xilinx 7 series FPGA technology (Artix for 7z020 and lowe
 * 2 x UART Controllers.
 * 2 x I2C (spec v2) Controllers.
 
-## PS-PL interfaces
+### PS-PL interfaces
 
-> TODO
+* AXI interfaces.
+* EMIO.
+* Interrupts:
+  * 28 from the I/O peripherals to the PL.
+  * 20 from the PL to the PS, where 16 are connected to the General Interrupt Controller (GIC).
+* DMA flow control.
+* 4 x clocks / 4 x resets.
+* Debug interfaces.
 
-### AXI interfaces
+## AXI interfaces
 
-> All the AXI interfaces are based on Standard AXI 3.0.
+> All the AXI interfaces are based on the AXI 3.0 Standard.
 
 * 4 x AXI_HP (High Performance) Interfaces
   * PL master, PS slave.
@@ -78,11 +85,45 @@ The PL is derived from Xilinx 7 series FPGA technology (Artix for 7z020 and lowe
   * **Note:** HP0/HP1 share one internal switch, while HP2/HP3 share another one, so if two HP ports are needed, use HP0/2 or HP1/3.
 * 1 x AXI_ACP (Accelerator Coherency Port) Interface.
   * PL master, PS slave.
-  * Low-latency access to L2 cache and OCP.
+  * Low-latency access to the Snoop Control Unit (SCU), to access L2 cache and OCM.
   * 64-bits wide.
   * **Note:** from a system perspective, the ACP interface has similar connectivity as the APU CPUs.
 * 4 x AXI_GP (General purpose) Interfaces.
   * 2 x 32-bit master interfaces.
+    * The DMAC interface to the PL is through this interfaces.
   * 2 x 32-bit slave interfaces.
 
+## Connectivity
+
+Mst \ Slv    | OCM | DDR Port 0 | DDR Port 1 | DDR Port 2 | DDR Port 3 | M_AXI_GP | AHB Slaves | APB Slaves
+---           |---  |---         |---         |---         |---         |---       |---         |---
+CPUs          | X   | X          |            |            |            | X        | X          | X
+AXI_ACP       | X   | X          |            |            |            | X        | X          | X
+AXI_HP{0,1}   | X   |            |            |            | X          |          |            |
+AXI_HP{2,3}   | X   |            |            | X          |            |          |            |
+S_AXI_GP{0,1} | X   |            | X          |            |            | X        | X          | X
+DMAC          | X   |            | X          |            |            | X        | X          | X
+AHB Masters   | X   |            | X          |            |            | X        | X          | X
+
 ## Address Map
+
+Address Range              | Bytes    | CPUs & ACP  | AXI_HP | Other masters | Notes
+---                        |---       |---          |---     |---            |---
+`0000_0000` to `0003_FFFF` | 256 KB   | OCM         | OCM    | OCM           | Address not filtered by SCU and OCM is mapped low
+same range than above      |          | DDR         | OCM    | OCM           | Address filtered by SCU and OCM is mapped low
+same range than above      |          | DDR         |        |               | Address filtered by SCU and OCM is not mapped low
+same range than above      |          |             |        |               | Address not filtered by SCU and OCM is not mapped low
+`0004_0000` to `0007_FFFF` | 256 KB   | DDR         |        |               | Address filtered by SCU
+same range than above      |          |             |        |               | Address not filtered by SCU
+`0008_0000` to `000F_FFFF` | 512 KB   | DDR         | DDR    | DDR           | Address filtered by SCU
+same range than above      |          |             | DDR    | DDR           | Address not filtered by SCU
+`0010_0000` to `3FFF_FFFF` | 1023 MB  | DDR         | DDR    | DDR           | Accessible to all interconnect masters
+`4000_0000` to `7FFF_FFFF` | 1024 MB  | PL          |        | PL            | M_AXI_GP0
+`8000_0000` to `BFFF_FFFF` | 1024 MB  | PL          |        | PL            | M_AXI_GP1
+`C000_0000` to `DFFF_FFFF` | 512 MB   |             |        |               | Nothing
+`E000_0000` to `FDFF_FFFF` | 480 MB   | REGS & MEMS |        | REGS & MEMS   | Registers and memories (QSPI, SMC)
+`FE00_0000` to `FFFB_FFFF` | 31.75 MB |             |        |               | Nothing
+`FFFC_0000` to `FFFF_FFFF` | 256 KB   | OCM         | OCM    | OCM           | OCM is mapped high
+same range than above      |          |             |        |               | OCM is not mapped high
+
+* **Note:** other masters include S_AXI_GP interfaces and the DMAC.
