@@ -1,6 +1,6 @@
 # Zynq UltraScale+ Overview
 
-> See the [Zynq UltraScale+ Device Technical Reference Manual (UG1085)](https://www.xilinx.com/support/documentation/user_guides/ug1085-zynq-ultrascale-trm.pdf)) for details.
+> See the [Zynq UltraScale+ Device Technical Reference Manual (UG1085)](https://www.xilinx.com/support/documentation/user_guides/ug1085-zynq-ultrascale-trm.pdf) for details.
 
 > I copied/adapted content from a great public course from [CERN](https://ohwr.org/project/soc-course/wikis/home), basically from [here](https://ohwr.org/project/soc-course/wikis/MPSoC-Architecture-Overview) and [here](https://ohwr.org/project/soc-course/wikis/MPSoC-Address-Map).
 
@@ -85,9 +85,9 @@ The MPSoC supports three different operational power modes:
 * 150G Interlaken v1.2.
 * GTH and GTY Transceivers.
 
-The peripherals' I/O interfaces can be router to the Multiplexed I/O (MIO) and the Extended Multiplexed I/O (EMIO).
+The peripheral's I/O interfaces can be router to the Multiplexed I/O (MIO) and the Extended Multiplexed I/O (EMIO).
 * There are up to 78 MIO ports divided in three banks available from the processing system and the MIO itself resides in the Low Power Domain.
-* As the number of MIO ports is limited, many of the available peripherals can be routed to the programmable logic through the Extended MIO (EMIO).
+* As the number of MIO ports is limited, many of the available peripherals can be routed to the programmable logic through EMIO.
 
 ### PS-PL interfaces
 
@@ -96,24 +96,24 @@ The peripherals' I/O interfaces can be router to the Multiplexed I/O (MIO) and t
 * 16 shared interrupts and four inter-processor interrupts.
 * 4 x clocks / ? x resets.
 * 2 x DMAC (Northwest Logic, 1.13):
-  * FPD DMA: 128-bit AXI data interface, 4 KB command buffer, non-coherent with CCI.
+  * FPD DMA: 128-bit AXI data interface, 4 KB command buffer, non-coherent with CCI (Coherent Interconnect).
   * LPD DMA: 64-bit AXI data interface, 2 KB command buffer, I/O coherent with CCI.
   * **Note:** each instantiation has 8 channels.
 
 ## AXI interfaces
 
-**PS master, PL slave:**
-* 3 x HPM: PS General Purpose Master interfaces (32, 64, and 128 bits width, default 128)
-  * 2 x HPM FPD: From full power domain
-  * 1 x HPM LPD: From low power domain (low latency from peripherals and RPU)
+**PS master / PL slave:**
+* 3 x PS General Purpose Master interfaces (32, 64, and 128 bits width, default 128)
+  * 2 x M_AXI_HPM[0:1]_FPD: FPD masters to PL slaves
+  * 1 x M_AXI_HPM0_LPD: LPD masters to PL slaves (low latency from peripherals and RPU)
 
-**PL master, PS slave:**
-* 7 x PL General Purpose Master interfaces (32, 64, and 128 bits width, default 128):
-  * 2 x S-AXI HPC FPD: access to full power domain
-  * 4 x S-AXI HP FPD: access to full power domain and DDR controller
-  * 1 x AXI LPD: access to low power domain
-* 1 x S-AXI ACE: PL Master AXI Coherency Extension (ACE) interface for coherent I/O to A53 L1 and L2 cache (128 bits width)
-* 1 x S-AXI ACP-FPD: PL Master ACP interface for L2 cache allocation from PL masters, limited to 64-byte cache line transfers (128 bits width).
+**PL master / PS slave:**
+* 7 x PS Slave interfaces (32, 64, and 128 bits width, default 128):
+  * 4 x S_AXI_HP[0:3]_FPD: non-coherent paths from PL to FPD main switch and DDR
+  * 2 x S_AXI_HPC[0:1]_FPD: I/O coherent with CCI (128-bits only)
+  * 1 x SAXI_LPD: non-coherent path from PL to IOP in LPD
+* 1 x S_AXI_ACE_FPD: two-way coherent path between memory in PL and CCI (128-bits)
+* 1 x S_AXI_ACP_FPD: legacy coherency, I/O coherent with L2 cache allocation (128-bits)
 
 ## Address Map
 
