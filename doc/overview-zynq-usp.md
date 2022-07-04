@@ -111,7 +111,7 @@ The peripheral's I/O interfaces can be router to the Multiplexed I/O (MIO) and t
 * 7 x PS Slave interfaces (32, 64, and 128 bits width, default 128):
   * 4 x S_AXI_HP[0:3]_FPD: non-coherent paths from PL to FPD main switch and DDR
   * 2 x S_AXI_HPC[0:1]_FPD: I/O coherent with CCI (128-bits only)
-  * 1 x SAXI_LPD: non-coherent path from PL to IOP in LPD
+  * 1 x S_AXI_LPD: non-coherent path from PL to IOP in LPD
 * 1 x S_AXI_ACE_FPD: two-way coherent path between memory in PL and CCI (128-bits)
 * 1 x S_AXI_ACP_FPD: legacy coherency, I/O coherent with L2 cache allocation (128-bits)
 
