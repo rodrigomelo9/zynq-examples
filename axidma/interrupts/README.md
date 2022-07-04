@@ -54,19 +54,19 @@ Instructions for `Zynq-7000` devices:
 * **Optional:** click on *Regenerate Layout*.
 
 Instructions for `Zynq-UltraScale+` devices:
- * Coming soon...
+* Not available.
 
 ![PS-PL configuration](../polling/images/ps-pl-config.png)
 *Zynq-7000 PS-PL configuration*
 
-![Interrupts](images/interrupts.png)
-*Zynq-7000 Interrupts configuration*
+![Interrupts configuration](images/interrupts.png)
+*Interrupts configuration*
 
 ![AXI-DMA configuration](../polling/images/axi-dma-config.png)
-*Zynq-7000 AXI-DMA configuration*
+*AXI-DMA configuration*
 
-![Zynq-7000](images/block_design.png)
-*Zynq-7000 block design*
+![Block Design](images/block_design.png)
+*Project block design*
 
 ## Bitstream generation, export and launch Vitis
 
