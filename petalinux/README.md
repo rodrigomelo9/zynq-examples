@@ -7,7 +7,6 @@
 
 ## Resources
 
-* [PetaLinux Tools Documentation: Reference Guide (UG1144)](https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide)
 * [Linux DMA From User Space 2.0](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/1027702787/Linux+DMA+From+User+Space+2.0)
 
 ## Vivado
@@ -71,3 +70,12 @@ Instructions for `Zynq-UltraScale+` devices:
 * Select where to export and *Next*, then *Finish*.
 
 ## Petalinux
+
+* Prepare petalinux environment: `source /<LOCATION>/settings.sh`
+* Create a project: `petalinux-create -t project -s <BOARD>.bsp -n <NAME>`
+* Enter to the created project: `cd <NAME>`
+* Initialize the project with HW info: `petalinux-config --get-hw-description=<EXPORTED_VIVADO_PROJECT>.xsa`, then `Exit`
+
+* Create a custom application: `petalinux-create -t apps --template c --name dmatest --enable`
+* Download `dmatest.c` from [here](https://support.xilinx.com/s/article/1223569) and replace `project-spec/meta-user/recipes-apps/dmatest/files/dmatest.c`
+* Re-build the whole project: `petalinux-build`
